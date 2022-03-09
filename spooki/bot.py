@@ -1,6 +1,7 @@
 import os
 from typing import List
 
+import aiohttp
 import colorama
 import discord
 import fade
@@ -34,6 +35,8 @@ class Spooki(commands.Bot):
         self.github = "soon"
         self.version = "v1.0 | Beta"
         self.uptime = discord.utils.utcnow()
+
+        self.session = aiohttp.ClientSession()
 
         # extensions
         self.load_extension("jishaku")

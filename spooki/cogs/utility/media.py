@@ -14,11 +14,11 @@ from config import emojis
 from spooki.utils.subclasses import SpookiContext
 from ._base import BaseUtilityCog
 
+class DownloadFlags(commands.FlagConverter, delimiter=' ', prefix='--'):
+    type: str = "mp4"
+    res: int = None
+
 class MediaMixin:
-    class DownloadFlags(commands.FlagConverter, delimiter=' ', prefix='--'):
-        type: str = "mp4"
-        res: int = None
-    
     @commands.command(aliases=["dl"], description="Download Reddit, TikTok, YouTube, Twitter, Roblox, SoundCloud audios and/or videos")
     async def download(self, ctx: SpookiContext, url: str, *, flags: DownloadFlags):
         REDDIT_REGEX = re.compile(r"http[s]?://www\.reddit.com/r/[a-zA-Z0-9_]{2,22}/comments/[a-zA-Z0-9_]{6}/.+$")
@@ -34,7 +34,7 @@ class MediaMixin:
         resolution = ("best" if flags.type == "mp4" else "bestaudio") if flags.res is None else f"best[height={flags.res}, ext=mp4]"
 
         name = "".join(random.choices(string.ascii_letters+string.digits, k=16))
-        async with aiofiles.tempfiles.TemporaryDirectory() as d:
+        async with aiofiles.tempfile.TemporaryDirectory() as d:
             path = os.path.join(d, f"{name}.{flags.type}")
 
             if re.match(TIKTOK_MOBILE_REGEX, url) or re.match(TIKTOK_MOBILE_REGEX2, url):
@@ -155,7 +155,7 @@ class MediaMixin:
                 try:
                     async with ctx.typing():
                         stdout = await asyncio.wait_for(
-                            BaseUtilityCog.yt_download(code, [url]),
+                            BaseUtilityCog.yt_download(self, code, [url]),
                             timeout=60
                         )
                 except asyncio.TimeoutError:
@@ -173,11 +173,11 @@ class MediaMixin:
                 formatted_stdout = f'{stdout}\n'
                 await msg.delete()
                 return await ctx.send(f"""Download failed with output:
-    stdout:
-    {'' if len(stdout) == 0 else formatted_stdout}
-    stderr:
-    {stderr}
-    """)
+stdout:
+{'' if len(stdout) == 0 else formatted_stdout}
+stderr:
+{stderr}
+""")
 
             await msg.edit(f"Now uploading {filetype} from `{path}`")
             await ctx.send(file=discord.File(path))

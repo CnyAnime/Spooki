@@ -8,5 +8,5 @@ from spooki.bot import Spooki
 class OwnerCog(BaseOwnerCog, BlacklistMixin, ExtensionMixin, name="Owner"):
     pass
 
-def setup(bot):
+def setup(bot: Spooki):
     bot.add_cog(OwnerCog(bot))

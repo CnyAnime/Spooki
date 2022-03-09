@@ -3,7 +3,7 @@ import discord
 # Bot
 intents = discord.Intents.all()
 activity = discord.Streaming(name="s!", url="https://www.youtube.com/watch?v=dQw4w9WgXcQ")
-token = ""
+token = "OTQyODgzNTgxNjUzNTY5NTY2.Ygq-ww.aGidX_0eskNEWPRIlagTSueX-Xc"
 extensions = ("guild_config", "owner", "error_handling")
 error_channel = None # the channel id of the channel where errors should be sent
 emojis = {
