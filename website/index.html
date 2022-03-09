@@ -32,9 +32,12 @@
 </head>
 
 
-<body style='background-color: #230431'>
+<body style='background-color: #fefefe'> <!-- #230431 -->
 <!-- particles.js container -->
 <div id='particles-js'></div>
+
+<!-- preloader -->
+<body class='preload'></body>
 
 <!-- header -->
 <div class='navbar' id='navbar'>
@@ -72,8 +75,10 @@
 <div class='features' id='features'>
     <div class='container grid'>
         <div>
-            <h3>Feature</h3>
-            <p>Feature description
+            <h3><b>Lorem ipsum</b></h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed fringilla scelerisque scelerisque. Curabitur non tempor risus.
             </p>
         </div>
         <img alt='Feature image explanation' src='assets/image.png'>
@@ -84,8 +89,10 @@
     <div class='container grid'>
         <img alt='Feature image explanation' src='assets/image.png'>
         <div>
-            <h3>Feature</h3>
-            <p>Feature description
+            <h3><b>Feature</b></h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed fringilla scelerisque scelerisque. Curabitur non tempor risus.
             </p>
         </div>
     </div>
@@ -94,8 +101,10 @@
 <div class='features'>
     <div class='container grid'>
         <div>
-            <h3>Feature</h3>
-            <p>Feature description
+            <h3><b>Feature</b></h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Sed fringilla scelerisque scelerisque. Curabitur non tempor risus.
             </p>
         </div>
         <img alt='Feature image explanation' src='assets/image.png'>
@@ -140,5 +149,8 @@
         prevScrollpos = currentScrollPos;
     }
 </script>
+<script>$(window).load(function () {
+    'body'.removeClass('.preload');
+});</script>
 
 </html>
