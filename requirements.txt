@@ -1,6 +1,8 @@
 git+https://github.com/Rapptz/discord.py
 jishaku
 asyncpg
+aiofiles
+beautifulsoup4
 
 # console colors
 fade
