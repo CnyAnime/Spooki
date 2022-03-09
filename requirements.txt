@@ -3,6 +3,7 @@ jishaku
 asyncpg
 aiofiles
 beautifulsoup4
+yt-dlp
 
 # console colors
 fade
