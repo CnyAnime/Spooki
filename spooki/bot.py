@@ -10,9 +10,9 @@ from rich.logging import Console
 from waifuim import WaifuAioClient
 
 import config
-from utils.database import Database
-from utils.errors import BlacklistedError
-from utils.subclasses import SpookiContext
+from .utils.database import Database
+from .utils.errors import BlacklistedError
+from .utils.subclasses import SpookiContext
 
 __all__ = ("Spooki",)
 
