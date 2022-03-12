@@ -1,4 +1,3 @@
-# for typing
 from spooki.bot import Spooki
 from ._base import BaseUtilityCog
 from .media import MediaMixin

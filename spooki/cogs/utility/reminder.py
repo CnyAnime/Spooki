@@ -1,6 +1,3 @@
-# for typing
-
-
 class ReminderMixin:
     # async def get_timers(self):
     #     ...

@@ -9,7 +9,6 @@ import aiofiles
 import discord
 from discord.ext import commands
 
-# for typing
 from spooki.utils.subclasses import SpookiContext
 from ._base import BaseUtilityCog
 

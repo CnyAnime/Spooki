@@ -1,22 +1,27 @@
+import asyncio
 import contextlib
 import functools
-import asyncio
-
-from spooki.utils.subclasses import Cog
-from bs4 import BeautifulSoup
 from io import StringIO
 from typing import List
+
+from bs4 import BeautifulSoup
 from yt_dlp import YoutubeDL
 
-def executor(executor = None):
+from spooki.utils.subclasses import Cog
+
+
+def executor(executor=None):
     def decorator(func):
         @functools.wraps(func)
         def wrapper(*args, **kwargs):
             partial = functools.partial(func, *args, **kwargs)
             loop = asyncio.get_running_loop()
             return loop.run_in_executor(executor, partial)
+
         return wrapper
+
     return decorator
+
 
 class BaseUtilityCog(Cog):
 
