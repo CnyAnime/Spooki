@@ -7,13 +7,15 @@ import discord
 import fade
 from discord.ext import commands
 from rich.logging import Console
+from waifuim import WaifuAioClient
 
 import config
-from .utils.subclasses import SpookiContext
-from .utils.database import Database
-from .utils.errors import BlacklistedError
+from utils.database import Database
+from utils.errors import BlacklistedError
+from utils.subclasses import SpookiContext
 
 __all__ = ("Spooki",)
+
 
 class Spooki(commands.Bot):
     def __init__(self):
@@ -23,7 +25,7 @@ class Spooki(commands.Bot):
             case_insensitive=config.case_insensitive,
             activity=config.activity,
             strip_after_prefix=config.strip_after_prefix,
-            allowed_mentions = discord.AllowedMentions.none()
+            allowed_mentions=discord.AllowedMentions.none()
         )
 
         self.console = Console()
@@ -37,6 +39,7 @@ class Spooki(commands.Bot):
         self.uptime = discord.utils.utcnow()
 
         self.session = aiohttp.ClientSession()
+        self.waifu = WaifuAioClient()
 
         # extensions
         self.load_extension("jishaku")

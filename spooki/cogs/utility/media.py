@@ -1,25 +1,27 @@
-import aiofiles
 import asyncio
-import discord
-import random
-import string
 import json
 import os
+import random
 import re
-from discord.ext import commands
+import string
 
-from config import emojis
+import aiofiles
+import discord
+from discord.ext import commands
 
 # for typing
 from spooki.utils.subclasses import SpookiContext
 from ._base import BaseUtilityCog
 
+
 class DownloadFlags(commands.FlagConverter, delimiter=' ', prefix='--'):
     type: str = "mp4"
     res: int = None
 
+
 class MediaMixin:
-    @commands.command(aliases=["dl"], description="Download Reddit, TikTok, YouTube, Twitter, Roblox, SoundCloud audios and/or videos")
+    @commands.command(aliases=["dl"],
+                      description="Download Reddit, TikTok, YouTube, Twitter, Roblox, SoundCloud audios and/or videos")
     async def download(self, ctx: SpookiContext, url: str, *, flags: DownloadFlags):
         REDDIT_REGEX = re.compile(r"http[s]?://www\.reddit.com/r/[a-zA-Z0-9_]{2,22}/comments/[a-zA-Z0-9_]{6}/.+$")
         REDDIT_VIDEO_REGEX = re.compile(r"http(?:s)?:\/\/v\.redd\.it\/[a-z0-9]{13}")
@@ -31,9 +33,10 @@ class MediaMixin:
         ROBLOX_AUDIO_REGEX = re.compile(r"http[s]?://(?:www\.)?roblox\.com/library/\d+/.+$")
         SOUNDCLOUD_REGEX = re.compile(r"http[s]?://(?:www|m\.)?soundcloud\.com/.+/.+")
 
-        resolution = ("best" if flags.type == "mp4" else "bestaudio") if flags.res is None else f"best[height={flags.res}, ext=mp4]"
+        resolution = (
+            "best" if flags.type == "mp4" else "bestaudio") if flags.res is None else f"best[height={flags.res}, ext=mp4]"
 
-        name = "".join(random.choices(string.ascii_letters+string.digits, k=16))
+        name = "".join(random.choices(string.ascii_letters + string.digits, k=16))
         async with aiofiles.tempfile.TemporaryDirectory() as d:
             path = os.path.join(d, f"{name}.{flags.type}")
 
@@ -44,7 +47,7 @@ class MediaMixin:
                 vid_id = match.group("id")
                 headers = {"user-agent": "okhttp"}
 
-                api = "https://toolav.herokuapp.com/id/?video_id="+vid_id
+                api = "https://toolav.herokuapp.com/id/?video_id=" + vid_id
                 request = (await (await self.bot.session.get(api, headers=headers)).read()).decode()
                 resp = json.loads(request)
                 aweme_id = resp.get("item", {}).get("aweme_id")
@@ -62,9 +65,9 @@ class MediaMixin:
                             await f.write(await request.read())
 
                         proc = await asyncio.create_subprocess_shell(
-                                f"ffmpeg -i {avi} {mp4}",
-                                stdout=asyncio.subprocess.PIPE,
-                                stderr=asyncio.subprocess.PIPE
+                            f"ffmpeg -i {avi} {mp4}",
+                            stdout=asyncio.subprocess.PIPE,
+                            stderr=asyncio.subprocess.PIPE
                         )
                         await proc.wait()
                         stdout, stderr = await proc.communicate()
@@ -79,14 +82,14 @@ class MediaMixin:
 
             elif re.match(REDDIT_REGEX, url) or re.match(REDDIT_VIDEO_REGEX, url):
                 url = await BaseUtilityCog.parse_reddit(url)
-                code = f"ffmpeg -i {url+'/DASHPlaylist.mpd'} {path}"
+                code = f"ffmpeg -i {url + '/DASHPlaylist.mpd'} {path}"
 
                 async with ctx.typing():
                     proc = await asyncio.create_subprocess_shell(
-                            code,
-                            stdout=asyncio.subprocess.PIPE,
-                            stderr=asyncio.subprocess.PIPE
-                        )
+                        code,
+                        stdout=asyncio.subprocess.PIPE,
+                        stderr=asyncio.subprocess.PIPE
+                    )
 
                 await proc.wait()
                 stdout, stderr = await proc.communicate()
@@ -97,10 +100,10 @@ class MediaMixin:
 
                 async with ctx.typing():
                     proc = await asyncio.create_subprocess_shell(
-                            code,
-                            stdout=asyncio.subprocess.PIPE,
-                            stderr=asyncio.subprocess.PIPE
-                        )
+                        code,
+                        stdout=asyncio.subprocess.PIPE,
+                        stderr=asyncio.subprocess.PIPE
+                    )
 
                 await proc.wait()
                 stdout, stderr = await proc.communicate()
@@ -113,10 +116,10 @@ class MediaMixin:
 
                 async with ctx.typing():
                     proc = await asyncio.create_subprocess_shell(
-                            code,
-                            stdout=asyncio.subprocess.PIPE,
-                            stderr=asyncio.subprocess.PIPE
-                        )
+                        code,
+                        stdout=asyncio.subprocess.PIPE,
+                        stderr=asyncio.subprocess.PIPE
+                    )
 
                 await proc.wait()
                 stdout, stderr = await proc.communicate()
@@ -161,11 +164,14 @@ class MediaMixin:
                 except asyncio.TimeoutError:
                     return await ctx.send("Downloading took over 60 seconds and has therefore been cancelled")
 
-            else: return await ctx.send("Unsupported url")
+            else:
+                return await ctx.send("Unsupported url")
 
             if flags.type == "mp3": filetype = "audio"
-            if flags.type == "mp4": filetype = "video"
-            else: "Unknown"
+            if flags.type == "mp4":
+                filetype = "video"
+            else:
+                "Unknown"
 
             msg = await ctx.reply(f"Now downloading {filetype} to `{path}`")
 

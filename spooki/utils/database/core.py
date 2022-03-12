@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Literal, List, Coroutine, Any, Union, TypeVar
 
 from discord import Guild, User, Member
@@ -135,3 +136,54 @@ class Database(BaseDB):
         if ret != "DELETE 0":
             self.blacklisted_ids.func.remove(type_)
         return ret
+
+    @getter("reminders")
+    async def get_reminders(self, user_id: int) -> List[str]:
+        """Get the reminders for an user.
+
+        Parameters
+        ----------
+        user_id : :class:`int`
+            The id of the user to get the reminders for.
+
+        Returns
+        -------
+        List[:class:`str`]
+            The reminders for the user."""
+        return await self.fetch("SELECT * FROM reminders WHERE user_id = $1", user_id)
+
+    @setter("reminders", (0,))
+    def add_reminder(self, user_id: int, name: str, timestamp) -> Response[str]:
+        """Add a reminder to an user's reminders list.
+
+        Parameters
+        ----------
+        user_id : :class:`int`
+            The id of the user to add the reminder to.
+        name : :class:`str`
+            The prefix to add to the guild.
+        timestamp: :class:`str`
+            The prefix to add to the guild."""
+        return self.execute("INSERT INTO reminders WHERE user_id = $1 VALUES ($2, $3)", user_id, name, timestamp)
+
+    @setter("reminders", (0,))
+    async def remove_reminder(self, user_id: int, id: int) -> str:
+        """Remove a prefix from an user's reminder list.
+
+        Parameters
+        ----------
+        user_id : :class:`int`
+            The id of the user to remove the reminder from.
+        id : :class:`int`
+            The id of the reminder to remove."""
+        return self.execute("DELETE FROM reminders WHERE (user_id, id) = ($1, $2)", user_id, id)
+
+    @setter("reminders")
+    def clear_reminders(self, user_id: int) -> Response[str]:
+        """Remove all the reminders from an user's reminder list.
+
+        Parameters
+        ----------
+        user_id : :class:`int`
+            The id of the user to remove the reminders from."""
+        return self.execute("DELETE FROM reminders WHERE user_id = $1", user_id)
