@@ -2,6 +2,9 @@ class ReminderMixin:
     # async def get_timers(self):
     #     ...
 
+    async def dispatch_timers(self):
+        ...
+
     async def wait_for_timers(self):
         ...
 
@@ -16,3 +19,4 @@ class ReminderMixin:
 
     async def on_timer_complete(self):
         ...
+    # lets work here what do here so, if i need the attributes O

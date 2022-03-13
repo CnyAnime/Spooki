@@ -1,15 +1,16 @@
-import re
 import os
+import re
 import sys
+
 from .bot import Spooki
 
 init = """from ._base import Base{0}
-
-# for typing
 from spooki.bot import Spooki
+
 
 class {0}(Base{0}):
     pass
+
 
 def setup(bot: Spooki):
     bot.add_cog({0}(bot))
@@ -17,21 +18,23 @@ def setup(bot: Spooki):
 
 _base = """from spooki.utils.subclasses import Cog
 
+
 class Base{}(Cog):
     pass
 """
 
 standalone = """from spooki.utils.subclasses import Cog
-
-# for typing
 from spooki.bot import Spooki
+
 
 class {0}(Cog):
     pass
 
+
 def setup(bot: Spooki):
     bot.add_cog({0}(bot))
 """
+
 
 def snake_to_camel(string: str) -> str:
     """Convert snake case to camel case.
@@ -43,6 +46,7 @@ def snake_to_camel(string: str) -> str:
     return string[0].upper() + re.sub(
         r"_([a-z])", lambda char: char.group(1).upper(), string[1:]
     )
+
 
 args = sys.argv[1:]
 

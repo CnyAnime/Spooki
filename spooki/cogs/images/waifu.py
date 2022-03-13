@@ -11,7 +11,7 @@ class WaifuFlags(commands.FlagConverter, case_insensitive=True, delimiter=" ", p
     nsfw: Optional[bool]
 
 
-class WaifuCog:
+class WaifuMixin:
     @commands.command()
     async def flags_test(self, ctx: SpookiContext, *, flags: WaifuFlags):
         if flags.tag not in ['uniform', 'maid', 'waifu', 'marin-kitagawa', 'mori-calliope', 'raiden-shogun', 'selfies',

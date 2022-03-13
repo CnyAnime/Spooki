@@ -56,7 +56,7 @@ class ExtensionMixin:
         extensions = extensions or list(self.bot.extensions.keys())
         return ctx.send("\n".join(meth(self.resolve_name(ext)) for ext in extensions))
 
-    @commands.command(aliases=["reload"])
+    @commands.command(aliases=['reload'])
     async def load(self, ctx: SpookiContext, *extensions: str):
         await self.handle_extension(ctx, extensions, self.load_extension)
 

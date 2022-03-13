@@ -28,7 +28,7 @@ class BlacklistMixin:
 
     @blacklist.command()
     async def remove(self, ctx: SpookiContext, obj: BlacklistType):
-        """Remove a user/guild from the bot's blacklist."""
+        """Remove a user/guild from the bots blacklist."""
 
         ret = await ctx.db.unblacklist(obj)
         if ret == "DELETE 0":
