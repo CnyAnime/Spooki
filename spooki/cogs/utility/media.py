@@ -1,23 +1,3 @@
-import asyncio
-import json
-import os
-import random
-import re
-import string
-
-import aiofiles
-import discord
-from discord.ext import commands
-
-from spooki.utils.subclasses import SpookiContext
-from ._base import BaseUtilityCog
-
-
-class DownloadFlags(commands.FlagConverter, delimiter=' ', prefix='--'):
-    type: str = "mp4"
-    res: int = None
-
-
 class MediaMixin:
     @commands.command(aliases=["dl"],
                       description="Download Reddit, TikTok, YouTube, Twitter, Roblox, SoundCloud audios and/or videos")
