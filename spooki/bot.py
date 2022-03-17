@@ -41,11 +41,6 @@ class Spooki(commands.Bot):
         self.session = aiohttp.ClientSession()
         self.waifu = WaifuAioClient()
 
-        # extensions
-        self.load_extension("jishaku")
-        for extension in config.extensions:
-            self.load_extension(f"spooki.cogs.{extension}")
-
         self.loop.run_until_complete(self.db_connect())
         self.add_check(self.blacklist_check, call_once=True)
 

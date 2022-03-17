@@ -8,5 +8,5 @@ class OwnerCog(BaseOwnerCog, BlacklistMixin, ExtensionMixin, name="Owner"):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog(OwnerCog(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog(OwnerCog(bot))

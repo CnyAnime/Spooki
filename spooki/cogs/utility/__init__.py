@@ -7,5 +7,5 @@ class UtilityCog(BaseUtilityCog, ReminderMixin, name="Utility"):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog(UtilityCog(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog(UtilityCog(bot))

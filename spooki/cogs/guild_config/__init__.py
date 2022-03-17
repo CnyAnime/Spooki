@@ -7,5 +7,5 @@ class GuildConfig(BaseGuildConfig, PrefixMixin, name="Server Settings"):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog(GuildConfig(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog(GuildConfig(bot))

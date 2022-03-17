@@ -8,5 +8,5 @@ class FunCog(BaseFunCog, GamesMixin, TelephoneMixin):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog(FunCog(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog(FunCog(bot))

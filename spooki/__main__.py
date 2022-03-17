@@ -1,9 +1,12 @@
+import asyncio
 import os
 import re
 import sys
 
+import config
 from .bot import Spooki
 
+# yikes. - Leo
 init = """from ._base import Base{0}
 from spooki.bot import Spooki
 
@@ -12,10 +15,11 @@ class {0}(Base{0}):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog({0}(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog({0}(bot))
 """
 
+# yikes. - Leo
 _base = """from spooki.utils.subclasses import Cog
 
 
@@ -23,6 +27,7 @@ class Base{}(Cog):
     pass
 """
 
+# yikes. - Leo
 standalone = """from spooki.utils.subclasses import Cog
 from spooki.bot import Spooki
 
@@ -31,8 +36,8 @@ class {0}(Cog):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog({0}(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog({0}(bot))
 """
 
 
@@ -50,7 +55,7 @@ def snake_to_camel(string: str) -> str:
 
 args = sys.argv[1:]
 
-if args and args[0] == "newcog":
+if args and args[0] == "newcog":  # yikes. - Leo
     base = f"spooki/cogs/{args[1]}"
     name = snake_to_camel(args[1]) + "Cog"
     if len(args) > 2 and args[2].lower() in ("-pkg", "--package"):
@@ -62,5 +67,13 @@ if args and args[0] == "newcog":
     else:
         with open(f"{base}.py", "w") as f:
             f.write(standalone.format(name))
-else:
-    Spooki().run()
+
+elif __name__ == "__main__":
+    async def runner():
+        bot = Spooki()
+        async with bot:
+            await bot.load_extension("jishaku")
+            for extension in config.extensions:
+                await bot.load_extension(f"spooki.cogs.{extension}")
+
+    asyncio.run(runner())

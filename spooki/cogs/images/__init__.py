@@ -7,5 +7,5 @@ class ImagesCog(BaseImagesCog, WaifuMixin, name="Images"):
     pass
 
 
-def setup(bot: Spooki):
-    bot.add_cog(ImagesCog(bot))
+async def setup(bot: Spooki):
+    await bot.add_cog(ImagesCog(bot))
