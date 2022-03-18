@@ -38,10 +38,11 @@ class Spooki(commands.Bot):
         self.version = "v1.0 | Beta"
         self.uptime = discord.utils.utcnow()
 
+    async def setup_hook(self):
         self.session = aiohttp.ClientSession()
         self.waifu = WaifuAioClient()
 
-        self.loop.run_until_complete(self.db_connect())
+        await self.db_connect()
         self.add_check(self.blacklist_check, call_once=True)
 
     async def on_ready(self):
