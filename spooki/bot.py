@@ -17,7 +17,7 @@ from .utils.subclasses import SpookiContext
 __all__ = ("Spooki",)
 
 
-class Spooki(commands.Botre):
+class Spooki(commands.Bot):
     def __init__(self):
         super().__init__(
             intents=config.intents,
