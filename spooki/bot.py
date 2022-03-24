@@ -39,6 +39,10 @@ class Spooki(commands.Bot):
         self.uptime = discord.utils.utcnow()
 
     async def setup_hook(self):
+        await self.load_extension("jishaku")
+        for extension in config.extensions:
+            await self.load_extension(f"spooki.cogs.{extension}")
+
         self.session = aiohttp.ClientSession()
         self.waifu = WaifuAioClient()
 

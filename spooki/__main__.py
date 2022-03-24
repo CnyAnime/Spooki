@@ -69,11 +69,4 @@ if args and args[0] == "newcog":  # yikes. - Leo
             f.write(standalone.format(name))
 
 elif __name__ == "__main__":
-    async def runner():
-        bot = Spooki()
-        async with bot:
-            await bot.load_extension("jishaku")
-            for extension in config.extensions:
-                await bot.load_extension(f"spooki.cogs.{extension}")
-
-    asyncio.run(runner())
+    Spooki().run()
