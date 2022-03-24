@@ -37,7 +37,6 @@
 1. Variable
 ---------------------------------------------------------*/
 @import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap");
-
 :root {
     --heading-color: #910aff;
     --bg-color: #f6f5fd;
@@ -248,7 +247,6 @@ select:focus {
         transform: translateY(-20px);
     }
 }
-
 /*-------- Scrollbar --------*/
 
 ::-webkit-scrollbar {
@@ -299,7 +297,6 @@ select:focus {
     -webkit-transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
     transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
 }
-
 .cursor-inner.cursor-hover {
     margin-left: -30px;
     margin-top: -30px;
@@ -308,7 +305,6 @@ select:focus {
     background-color: #4D41E1;
     opacity: .2;
 }
-
 .cursor-outer {
     margin-left: -15px;
     margin-top: -15px;
@@ -367,7 +363,6 @@ select:focus {
         transform: translateY(0);
     }
 }
-
 /* ==== Splitting Text ===== */
 
 .splitting .char {
@@ -410,7 +405,6 @@ select:focus {
         transform: translateY(0);
     }
 }
-
 .splitting.txt.animated .char {
     animation: fadeIn 0.3s cubic-bezier(0.3, 0, 0.7, 1) both;
     animation-delay: calc(10ms * var(--char-index));
@@ -428,7 +422,6 @@ select:focus {
         opacity: 1;
     }
 }
-
 /*-------------------------------------------------------
 4. Nav css
 ---------------------------------------------------------*/
@@ -939,7 +932,6 @@ button.theme-btn {
         max-width: 1194px;
     }
 }
-
 /*Scroll top css */
 #scrtop {
     display: none;
@@ -1128,7 +1120,6 @@ button.theme-btn {
 .site-title span.about-sub-title {
     padding-top: 5rem;
 }
-
 .about-title {
     font-size: 36px;
     font-weight: 700;
@@ -1668,7 +1659,6 @@ button.theme-btn {
     margin-bottom: 1.5rem !important;
     font-weight: 600 !important;
 }
-
 .blog-2 .blog-meta {
     margin-bottom: 3rem !important;
     line-height: 1;
@@ -1677,7 +1667,6 @@ button.theme-btn {
 .blog-box.blog-2 .blog-info {
     padding: 3rem;
 }
-
 .recent-post-info a h5 {
     font-size: 1.8rem !important;
     font-weight: 500 !important;
@@ -1933,19 +1922,16 @@ button.theme-btn {
 .feedback-right p {
     padding-right: 17rem;
 }
-
 .feedback-right .feedback-bio h5 {
     font-weight: 500;
     font-size: 2rem;
     line-height: 1;
     margin-bottom: 5px;
 }
-
 .feedback-right .feedback-bio span {
     font-size: 1.6rem;
     line-height: 1;
 }
-
 .feedback-right .feedback-bio .review-rating i {
     color: #f2c617;
 }
@@ -2452,7 +2438,6 @@ footer .footer-shape img {
         padding: 0 10px;
     }
 }
-
 .page-numbers {
     display: block;
     padding: 0 25px;
@@ -2513,7 +2498,6 @@ footer .footer-shape img {
         content: none;
     }
 }
-
 /*-------------------------------------------------------
 20. Breadcrumb css
 ---------------------------------------------------------*/
