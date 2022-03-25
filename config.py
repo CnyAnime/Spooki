@@ -1,10 +1,6 @@
 import os
 
 import discord
-from dotenv import load_dotenv
-
-# Load the .env file
-load_dotenv()
 
 # Bot
 intents = discord.Intents.all()
@@ -27,5 +23,7 @@ mention_prefix = True
 host = "localhost"
 port = 5432
 user = "postgres"
-password = "1211"
 database = "spooki"
+
+# Spotify
+spotify_client_id = ""
