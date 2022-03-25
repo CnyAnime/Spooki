@@ -24,6 +24,3 @@ host = "localhost"
 port = 5432
 user = "postgres"
 database = "spooki"
-
-# Spotify
-spotify_client_id = ""
