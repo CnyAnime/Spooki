@@ -43,6 +43,10 @@
     --body-color: #f08000;
     --theme-color: #910aff;
     --theme-color2: #f08000;
+    --darker-gray-color: #2a2e33;
+    --dark-gray-color: #2e3338;
+    --gray-color: #36393F;
+    --light-gray-color: #B9BBBE;
     --font-1: 'Hind', sans-serif;
     --font-2: 'Jost', sans-serif;
 }
@@ -161,12 +165,6 @@ p {
     -o-transition: all 0.3s ease-out 0s;
     transition: all 0.3s ease-out 0s;
     height: auto;
-}
-
-hr {
-    padding: 0px;
-    border-bottom: 1px solid #eceff8;
-    border-top: 0px;
 }
 
 label {
@@ -293,7 +291,7 @@ select:focus {
     width: 6px;
     height: 6px;
     z-index: 10000001;
-    background-color: #4D41E1;
+    background-color: var(--theme-color2);
     -webkit-transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
     transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
 }
@@ -302,7 +300,7 @@ select:focus {
     margin-top: -30px;
     width: 60px;
     height: 60px;
-    background-color: #4D41E1;
+    background-color: var(--theme-color2);
     opacity: .2;
 }
 .cursor-outer {
@@ -310,7 +308,7 @@ select:focus {
     margin-top: -15px;
     width: 30px;
     height: 30px;
-    border: 2px solid #4D41E1;
+    border: 2px solid var(--theme-color2);
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     z-index: 10000000;
@@ -463,8 +461,7 @@ select:focus {
 }
 
 .navbar.sticked.in {
-    background: var(--bg-color);
-    border-bottom: 1px solid var(--bg-color);
+    background: var(--darker-gray-color);
 }
 
 .navbar .navbar-brand .logo-display {
@@ -1073,9 +1070,7 @@ button.theme-btn {
     padding: 9rem 3rem;
     -webkit-border-radius: 5px;
     border-radius: 5px;
-    background-color: var(--white-color);
-    -webkit-box-shadow: 0px 25px 70px 0px rgba(152, 152, 153, 0.25);
-    box-shadow: 0px 25px 70px 0px rgba(152, 152, 153, 0.25);
+    background-color: var(--dark-gray-color);
 }
 
 .feature-box .feature-icon {
@@ -1111,7 +1106,7 @@ button.theme-btn {
 }
 
 .about-sub-title {
-    display: block;
+    display: flex;
     margin-bottom: 1.6rem;
     font-size: 1.6rem;
     color: var(--theme-color);
@@ -1350,8 +1345,7 @@ button.theme-btn {
 
 .accordion-item {
     margin-bottom: -1px;
-    background-color: #fff;
-    border: 1px solid #f6f5ff;
+    background-color: var(--dark-gray-color);
 }
 
 .accordion-item:not(last-child) {
