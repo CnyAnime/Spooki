@@ -7,7 +7,6 @@ import discord
 import fade
 from discord.ext import commands
 from rich.logging import Console
-from waifuim import WaifuAioClient
 
 import config
 from .utils.database import Database
@@ -85,7 +84,9 @@ class Spooki(commands.Bot):
         if config.mention_prefix:
             if prefixes:
                 return commands.when_mentioned_or(*prefixes)(self, message)
+
             return commands.when_mentioned(self, message)
+
         return prefixes
 
     def run(self, token: str = config.token, *, reconnect: bool = True):
