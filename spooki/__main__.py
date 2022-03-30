@@ -6,7 +6,6 @@ import sys
 import config
 from .bot import Spooki
 
-# yikes. - Leo
 init = """from ._base import Base{0}
 from spooki.bot import Spooki
 
@@ -19,7 +18,6 @@ async def setup(bot: Spooki):
     await bot.add_cog({0}(bot))
 """
 
-# yikes. - Leo
 _base = """from spooki.utils.subclasses import Cog
 
 
@@ -27,7 +25,6 @@ class Base{}(Cog):
     pass
 """
 
-# yikes. - Leo
 standalone = """from spooki.utils.subclasses import Cog
 from spooki.bot import Spooki
 
