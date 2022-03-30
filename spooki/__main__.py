@@ -52,8 +52,8 @@ def snake_to_camel(string: str) -> str:
 
 args = sys.argv[1:]
 
-if args and args[0] == "newcog":  # yikes. - Leo
-    base = f"spooki/cogs/{args[1]}"
+if args and args[0] == "newcog":
+    base = f"Spooki/cogs/{args[1]}"
     name = snake_to_camel(args[1]) + "Cog"
     if len(args) > 2 and args[2].lower() in ("-pkg", "--package"):
         os.mkdir(base)

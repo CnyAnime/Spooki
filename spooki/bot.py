@@ -40,7 +40,7 @@ class Spooki(commands.Bot):
     async def setup_hook(self):
         await self.load_extension("jishaku")
         for extension in config.extensions:
-            await self.load_extension(f"spooki.cogs.{extension}")
+            await self.load_extension(f"./cogs.{extension}")
 
         self.session = aiohttp.ClientSession()
         self.waifu = WaifuAioClient()
