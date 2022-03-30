@@ -25,3 +25,4 @@ host = "localhost"
 port = 5432
 user = "postgres"
 database = "spooki"
+password = secrets.password

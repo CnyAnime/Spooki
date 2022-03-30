@@ -7,6 +7,7 @@ import discord
 import fade
 from discord.ext import commands
 from rich.logging import Console
+from waifuim import WaifuAioClient
 
 import config
 from .utils.database import Database
@@ -40,7 +41,7 @@ class Spooki(commands.Bot):
     async def setup_hook(self):
         await self.load_extension("jishaku")
         for extension in config.extensions:
-            await self.load_extension(f"./cogs.{extension}")
+            await self.load_extension(f"spooki.cogs.{extension}")
 
         self.session = aiohttp.ClientSession()
         self.waifu = WaifuAioClient()
