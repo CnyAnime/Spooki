@@ -17,13 +17,17 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
 share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
 MANIFEST
 
+<<<<<<< HEAD
 # Other
 secrets.py
 processed/
+=======
+# Other files
+secrets.py
+>>>>>>> 35a9daa60cc4cd9c743248a049b5f380d0996cc4
