@@ -15,7 +15,10 @@ async def home():
 
 @app.errorhandler(404)
 async def error_handler(error):
-    return await quart.render_template("400.html")
+    if error.code == 404:
+        return await quart.render_template("404.html")
+
+    return f"{error.code}: {error.description}"
 
 
 if __name__ == "__main__":
