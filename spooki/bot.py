@@ -7,7 +7,7 @@ import discord
 import fade
 from discord.ext import commands
 from rich.logging import Console
-from waifuim import WaifuAioClient
+# from waifuim import WaifuAioClient
 
 import config
 from .utils.database import Database
@@ -44,7 +44,7 @@ class Spooki(commands.Bot):
             await self.load_extension(f"spooki.cogs.{extension}")
 
         self.session = aiohttp.ClientSession()
-        self.waifu = WaifuAioClient()
+        # self.waifu = WaifuAioClient()
 
         await self.db_connect()
         self.add_check(self.blacklist_check, call_once=True)

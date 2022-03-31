@@ -1,6 +1,7 @@
 git+https://github.com/Rapptz/discord.py
 git+https://github.com/Gorialis/jishaku
 asyncpg~=0.25.0
+quart~=0.17.0
 
 # console colors
 fade~=0.0.9
