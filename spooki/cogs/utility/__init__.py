@@ -1,9 +1,10 @@
 from spooki.bot import Spooki
 from ._base import BaseUtilityCog
 from .reminder import ReminderMixin
+from .info import InfoMixin
 
 
-class UtilityCog(BaseUtilityCog, ReminderMixin, name="Utility"):
+class UtilityCog(BaseUtilityCog, ReminderMixin, InfoMixin, name="Utility"):
     pass
 
 

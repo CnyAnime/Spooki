@@ -37,6 +37,8 @@ class Spooki(commands.Bot):
         self.github = "soon"
         self.version = "v1.0 | Beta"
         self.uptime = discord.utils.utcnow()
+        self.color = 0x6366F1 
+        self.support_reminders = ['vote for m11e UWUUUW', 'invite me1!1 POWOOOOOOO', 'join my communit server!1! QWQWQWQWQ']
 
     async def setup_hook(self):
         await self.load_extension("jishaku")

@@ -1,0 +1,5 @@
+TICKS = {
+    True: '',
+    False: '',
+    None: ''
+}

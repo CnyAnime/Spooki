@@ -26,3 +26,4 @@ MANIFEST
 # Other files
 secrets.py
 processed/
+spooki/cogs/owner/private.py
