@@ -1,3 +1,4 @@
+from multiprocessing.connection import Listener
 import discord
 
 from discord.ext import commands
@@ -31,41 +32,51 @@ class PriavteMixin:
         'snow': 'https://cdn.discordapp.com/avatars/800062918417711104/a4498bdc2bad9e7de173c3b555620e8a.png?size=2048'
     }
 
+    ender = str
+    diamond = str
+
     async def send_webhook_message(self, message: discord.Message):
         bot = message._state._get_client()
         split = message.content.split("b!")
+        bear = split[0]
+        send = split[1]
 
-        if split[0] not in bears:
-            return await message.reply(":x: That bear doesn't exist, sorry!")
+        if bear.lower() not in self.bears: # check if the bear exists
+            return await message.reply("That bear doesn't exist, sorry!") # tell the user the bear doesn't exist
         
-        webhooks = await message.channel.webhooks()
-        for webhook in webhooks:
-            if split[0].lower() == webhook.name.lower():
-                await webhook.send(split[1])
-                await message.delete()
-                continue
+        webhooks = await message.channel.webhooks() # get all webhooks for the channel
+        if not webhooks: # if there are no webhooks
+            msg = await message.reply("Hold on, I'm creating that webhook for you...") # tell the user we are making the webhook
+            webhook = await message.channel.create_webhook(name=bear, avatar=await bot.http.get_from_cdn(self.bears[bear]))
+            await webhook.send(send) # send a message using that webhook
+            await msg.delete() # delete our message
+            return await message.delete() # delete the author's message, also return so the code does not execute that for loop
 
-            webhook = await message.channel.create_webhook(name=split[0].title(),
-                                                           avatar=await bot.http.get_from_cdn(bears[split[0]]))
+        for webhook in webhooks: # for every webhook in the channel
+            if bear.lower() == webhook.name.lower(): # if the bear name is the same as the webhook name
+                await webhook.send(send) # send a message using that webhook
+                await message.delete() # delete the author's message
+                break # break the for loop
+
+            else: # the webhook's name isn't the same as the bear
+                await webhook.edit(name=bear.title(), avatar=await bot.http.get_from_cdn(self.bears[bear])) # edit the webhook
+                await webhook.send(send) # send a message using that webhook
+                await message.delete() # delete the author's message
+                break # break the for loop
     
 
-@_bot.listen('on_message')
-async def bears(message):
-    if not message.guild: return
-    if not message.guild.id == 796764299749490759: return
-    if "b!" not in message.content.lower(): return
+    @commands.Cog.listener('on_message')
+    async def bears(self, message):
+        if not message.guild:
+            return
 
-    split = message.content.split("b!")
-    if split[0] in bears:
-        webhooks = await message.channel.webhooks()
-        for webhook in webhooks:
-            if split[0].lower() == webhook.name.lower():
-                await webhook.send(split[1])
-                await message.delete()
-                continue
-            webhook = await message.channel.create_webhook(name=split[0].title(),
-                                                    avatar=await _bot.http.get_from_cdn(bears[split[0]]),
-                                                    reason="Roleplay")
-            await webhook.send(split[1])
-            await message.delete()
-            continue
+        if message.guild.id != 796764299749490759:
+            return
+        
+        if message.author.bot:
+            return
+
+        if message.content.lower() not in self.bears:
+            return
+
+        await self.send_webhook_message(message)
