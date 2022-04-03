@@ -15,6 +15,39 @@ if TYPE_CHECKING:
 __all__ = ("SpookiContext", "Cog")
 
 
+class ConfirmationView(discord.ui.View):
+    """ from https://github.com/LeoCx1000/discord-bots/blob/rewrite/utils/context.py#L47-L79 """
+    def __init__(self, ctx: SpookiContext, *, timeout: int = 60) -> None:
+        super().__init__(timeout=timeout)
+        self.ctx = ctx
+        self.value = None
+        self.message: discord.Message | None = None
+
+    async def interaction_check(self, interaction: discord.Interaction) -> bool:
+        return interaction.user == self.ctx.author
+
+    async def on_timeout(self) -> None:
+        if self.message:
+            for item in self.children:
+                item.disabled = True
+            await self.message.edit(content=f'Timed out waiting for a button press from {self.ctx.author}.', view=self)
+
+    def stop(self) -> None:
+        super().stop()
+
+    @discord.ui.button(label='Confirm', style=discord.ButtonStyle.primary)
+    async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button) -> None:
+        self.value = True
+        self.stop()
+        await interaction.message.delete()
+
+    @discord.ui.button(label='Cancel', style=discord.ButtonStyle.danger)
+    async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button) -> None:
+        self.value = False
+        self.stop()
+        await interaction.message.delete()
+
+
 class SpookiContext(commands.Context):
     @property
     def db(self) -> Database:
@@ -62,6 +95,17 @@ class SpookiContext(commands.Context):
             return await super().send(content=content, embeds=embeds, reference=reference, file=file, **kwargs)
         except discord.HTTPException:
             return await super().send(content=content, embeds=embeds, reference=None, file=file, **kwargs)
+
+    async def confirm(self, content=None, /, *, timeout: int = 30, **kwargs) -> bool | None:
+        """ from https://github.com/LeoCx1000/discord-bots/blob/rewrite/utils/context.py#L165-L192 """
+        view = ConfirmationView(self, timeout=timeout)
+        try:
+            view.message = await self.channel.send(content, **kwargs, view=view)
+            await view.wait()
+            return view.value
+        except discord.HTTPException:
+            view.stop()
+            return None
 
 
 class Cog(commands.Cog):
